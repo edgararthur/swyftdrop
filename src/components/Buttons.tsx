@@ -1,32 +1,48 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import colors from "../config/colors";
+import { useFonts } from "expo-font";
 
 const AppButton = ({
 	title,
 	backgroundColor = "white",
-	textColor = "whit",
+	textColor = "white",
 }) => {
+	const [fontsLoaded] = useFonts({
+		"Poppins-Regular": require("../../assets/fonts/Poppins-Regular.ttf"),
+		"Poppins-Medium": require("../../assets/fonts/Poppins-Medium.ttf"),
+		"Poppins-Semibold": require("../../assets/fonts/Poppins-SemiBold.ttf"),
+		"Poppins-Bold": require("../../assets/fonts/Poppins-Bold.ttf"),
+	});
+
+	useEffect(() => {
+		if (!fontsLoaded) {
+			return;
+		}
+	}, [fontsLoaded]);
+
+	if (!fontsLoaded) {
+		return null;
+	}
+
 	return (
-		<TouchableOpacity>
-			<View
+		<TouchableOpacity
+			style={[
+				styles.button,
+				{
+					backgroundColor:
+						colors[backgroundColor as keyof typeof colors],
+				},
+			]}
+		>
+			<Text
 				style={[
-					styles.button,
-					{
-						backgroundColor:
-							colors[backgroundColor as keyof typeof colors],
-					},
+					styles.text,
+					{ color: colors[textColor as keyof typeof colors] },
 				]}
 			>
-				<Text
-					style={[
-						styles.text,
-						{ color: colors[textColor as keyof typeof colors] },
-					]}
-				>
-					{title}
-				</Text>
-			</View>
+				{title}
+			</Text>
 		</TouchableOpacity>
 	);
 };
@@ -38,13 +54,14 @@ const styles = StyleSheet.create({
 		marginRight: 16,
 		marginLeft: 16,
 		marginTop: 35,
+		justifyContent: "center",
+		alignItems: "center",
 	},
 	text: {
-		color: colors.primary,
-		fontWeight: "600",
+		fontWeight: "bold",
 		fontSize: 20,
-		padding: 13,
 		textAlign: "center",
+		fontFamily: "Poppins-Medium",
 	},
 });
 
