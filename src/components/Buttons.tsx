@@ -1,12 +1,25 @@
 import React, { useEffect } from "react";
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+	Text,
+	StyleSheet,
+	TouchableOpacity,
+	TouchableOpacityProps,
+} from "react-native";
 import colors from "../config/colors";
 import { useFonts } from "expo-font";
 
-const AppButton = ({
+interface CustomButtonProps extends TouchableOpacityProps {
+	title: string;
+	backgroundColor?: keyof typeof colors;
+	textColor?: keyof typeof colors;
+}
+
+const CustomButton: React.FC<CustomButtonProps> = ({
 	title,
 	backgroundColor = "white",
 	textColor = "white",
+	onPress,
+	...props
 }) => {
 	const [fontsLoaded] = useFonts({
 		"Poppins-Regular": require("../../assets/fonts/Poppins-Regular.ttf"),
@@ -30,17 +43,13 @@ const AppButton = ({
 			style={[
 				styles.button,
 				{
-					backgroundColor:
-						colors[backgroundColor as keyof typeof colors],
+					backgroundColor: colors[backgroundColor],
 				},
 			]}
+			onPress={onPress}
+			{...props}
 		>
-			<Text
-				style={[
-					styles.text,
-					{ color: colors[textColor as keyof typeof colors] },
-				]}
-			>
+			<Text style={[styles.text, { color: colors[textColor] }]}>
 				{title}
 			</Text>
 		</TouchableOpacity>
@@ -65,4 +74,4 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default AppButton;
+export default CustomButton;
