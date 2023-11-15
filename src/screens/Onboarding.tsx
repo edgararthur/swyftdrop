@@ -6,8 +6,19 @@ import { useNavigation } from "@react-navigation/native";
 
 const Onboarding = () => {
 	const [fontsLoaded] = useFonts({
-		Poppins: require("@expo-google-fonts/poppins"),
+		"Poppins-Regular": require("../../assets/fonts/Poppins-Regular.ttf"),
+		"Poppins-Medium": require("../../assets/fonts/Poppins-Medium.ttf"),
+		"Poppins-Semibold": require("../../assets/fonts/Poppins-SemiBold.ttf"),
+		"Poppins-Bold": require("../../assets/fonts/Poppins-Bold.ttf"),
 	});
+
+	const navigation = useNavigation();
+
+	useEffect(() => {
+		if (!fontsLoaded) {
+			return;
+		}
+	}, [fontsLoaded]);
 
 	return (
 		<View style={styles.container}>
@@ -36,7 +47,7 @@ const styles = StyleSheet.create({
 		fontSize: 38,
 		fontWeight: "700",
 		paddingVertical: 15,
-		fontFamily: "Poppins",
+		fontFamily: "Poppins-Semibold",
 	},
 });
 
