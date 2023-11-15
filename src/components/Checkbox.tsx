@@ -4,6 +4,7 @@ import { MaterialIcons } from "@expo/vector-icons";
 import colors from "../config/colors";
 
 interface CheckboxProps {
+	label: string;
 	onChange: (value: boolean) => void;
 }
 
