@@ -1,13 +1,59 @@
-import { View, Text, StyleSheet, TextInput } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
+import {
+	View,
+	Text,
+	StyleSheet,
+	TextInput,
+	TextInputProps,
+	KeyboardTypeOptions,
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useFonts } from "expo-font";
 
 import colors from "../config/colors";
 
-const AppInput = ({ name, style }) => {
+interface AppInputProps extends TextInputProps {
+	name: string;
+	style?: any;
+	keyboardType?: KeyboardTypeOptions;
+	onChangeText: (text: string) => void;
+}
+
+const AppInput: React.FC<AppInputProps> = ({
+	name,
+	style,
+	keyboardType,
+	onChangeText,
+	...rest
+}) => {
+	const [fontsLoaded] = useFonts({
+		"Poppins-Regular": require("../../assets/fonts/Poppins-Regular.ttf"),
+		"Poppins-Medium": require("../../assets/fonts/Poppins-Medium.ttf"),
+		"Poppins-Semibold": require("../../assets/fonts/Poppins-SemiBold.ttf"),
+		"Poppins-Bold": require("../../assets/fonts/Poppins-Bold.ttf"),
+	});
+
+	const navigation = useNavigation();
+
+	useEffect(() => {
+		if (!fontsLoaded) {
+			return;
+		}
+	}, [fontsLoaded]);
+
+	if (!fontsLoaded) {
+		return null;
+	}
+
 	return (
 		<View style={[styles.btnContainer, style]}>
 			<Text style={styles.text}>{name}</Text>
-			<TextInput style={styles.input} />
+			<TextInput
+				style={styles.input}
+				keyboardType={keyboardType}
+				onChangeText={onChangeText}
+				{...rest}
+			/>
 		</View>
 	);
 };
@@ -31,7 +77,9 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: "#898989",
 		paddingLeft: 10,
-		fontSize: 17,
+		fontSize: 18,
+		color: "#2a2a2a",
+		fontFamily: "Poppins-Medium",
 	},
 });
 
