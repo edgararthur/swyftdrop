@@ -6,6 +6,8 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import Onboarding from "./src/screens/Onboarding";
 import Carousel from "./src/screens/Carousel";
 import Welcome from "./src/screens/Welcome";
+import Signin from "./src/screens/Signin";
+import Signup from "./src/screens/Signup";
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +45,16 @@ function Main() {
 			<Stack.Screen
 				name="Welcome"
 				component={Welcome}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name="Signin"
+				component={Signin}
+				options={{ headerShown: false }}
+			/>
+			<Stack.Screen
+				name="Signup"
+				component={Signup}
 				options={{ headerShown: false }}
 			/>
 		</Stack.Navigator>
