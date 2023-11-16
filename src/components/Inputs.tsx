@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
 	},
 	input: {
 		width: "100%",
-		height: 48,
+		height: 50,
 		borderRadius: 4,
 		fontWeight: "600",
 		borderWidth: 1,
