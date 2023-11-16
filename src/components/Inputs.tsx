@@ -24,6 +24,9 @@ const AppInput: React.FC<AppInputProps> = ({
 	style,
 	keyboardType,
 	onChangeText,
+	autoCorrect,
+	secureTextEntry,
+	autoCapitalize,
 	...rest
 }) => {
 	const [fontsLoaded] = useFonts({
@@ -52,6 +55,9 @@ const AppInput: React.FC<AppInputProps> = ({
 				style={styles.input}
 				keyboardType={keyboardType}
 				onChangeText={onChangeText}
+				autoCorrect={autoCorrect}
+				secureTextEntry={secureTextEntry}
+				autoCapitalize={autoCapitalize}
 				{...rest}
 			/>
 		</View>
