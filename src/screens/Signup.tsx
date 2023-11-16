@@ -7,6 +7,7 @@ import {
 	TouchableOpacity,
 	Alert,
 	SafeAreaView,
+	Platform,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import AppInput from "../components/Inputs";
@@ -43,7 +44,7 @@ export default function Signup() {
 	};
 
 	return (
-		<SafeAreaView>
+		<SafeAreaView style={styles.main}>
 			<View style={styles.container}>
 				{StatusBar.currentHeight !== undefined && (
 					<StatusBar
@@ -68,6 +69,9 @@ export default function Signup() {
 						onChangeText={(text: React.SetStateAction<string>) =>
 							setFullName(text)
 						}
+						autoCorrect={false}
+						secureTextEntry={false}
+						autoCapitalize={"none"}
 						keyboardType="default"
 					/>
 					<AppInput
@@ -76,6 +80,9 @@ export default function Signup() {
 						onChangeText={(email: React.SetStateAction<any>) =>
 							setEmail(email)
 						}
+						autoCorrect={false}
+						secureTextEntry={false}
+						autoCapitalize="none"
 						keyboardType="email-address"
 					/>
 					<AppInput
@@ -84,6 +91,9 @@ export default function Signup() {
 						onChangeText={(phone: React.SetStateAction<string>) =>
 							setPhoneNumber(phone)
 						}
+						autoCorrect={false}
+						secureTextEntry={false}
+						autoCapitalize={"none"}
 						keyboardType="phone-pad"
 					/>
 					<AppInput
@@ -92,6 +102,9 @@ export default function Signup() {
 						onChangeText={(
 							password: React.SetStateAction<string>
 						) => setPassword(password)}
+						autoCorrect={false}
+						secureTextEntry={true}
+						autoCapitalize="none"
 						keyboardType="default"
 					/>
 					<AppInput
@@ -100,9 +113,12 @@ export default function Signup() {
 						onChangeText={(
 							confirmPassword: React.SetStateAction<string>
 						) => setConfirmPassword(confirmPassword)}
+						autoCorrect={false}
+						secureTextEntry={true}
+						autoCapitalize={"none"}
 						keyboardType="default"
 					/>
-					<View>
+					<View style={styles.checkbox}>
 						<Checkbox
 							label="By signing up, you agree to our Terms of Service and Privacy Policy."
 							onChange={handleCheckboxChange}
@@ -132,6 +148,9 @@ export default function Signup() {
 }
 
 const styles = StyleSheet.create({
+	main: {
+		backgroundColor: "#eef1fd",
+	},
 	container: {
 		backgroundColor: "#eef1fd",
 		height: "100%",
@@ -141,7 +160,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "center",
 		paddingHorizontal: 10,
-		paddingTop: StatusBar.currentHeight + 72,
+		paddingTop: 10,
 	},
 	headerText: {
 		flex: 1,
@@ -156,15 +175,18 @@ const styles = StyleSheet.create({
 		paddingRight: 20,
 	},
 	form: {
-		paddingTop: 58,
+		paddingTop: 50,
 	},
 	input: {
 		marginBottom: 20,
 		color: "#2a2a2a",
 		fontSize: 16,
 	},
+	checkbox: {
+		paddingTop: 5,
+	},
 	submitBtn: {
-		marginTop: 20,
+		// marginTop: 20,
 	},
 	signInContainer: {
 		alignSelf: "flex-end",
