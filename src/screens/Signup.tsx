@@ -22,6 +22,13 @@ export default function Signup() {
 		console.log("Checkbox is checked:", checked);
 	};
 
+	// toggle password visibility
+	const [isPasswordVisible, setPasswordVisibility] = useState(true);
+
+	const togglePasswordVisibility = () => {
+		setPasswordVisibility(!isPasswordVisible);
+	};
+
 	const [fullName, setFullName] = useState("");
 	const [email, setEmail] = useState("");
 	const [phone, setPhoneNumber] = useState("");
@@ -41,6 +48,7 @@ export default function Signup() {
 		setPhoneNumber("");
 		setPassword("");
 		setConfirmPassword("");
+		navigation.navigate("VerifyPhone");
 	};
 
 	return (
@@ -96,28 +104,60 @@ export default function Signup() {
 						autoCapitalize={"none"}
 						keyboardType="phone-pad"
 					/>
-					<AppInput
-						name="Password"
-						style={styles.input}
-						onChangeText={(
-							password: React.SetStateAction<string>
-						) => setPassword(password)}
-						autoCorrect={false}
-						secureTextEntry={true}
-						autoCapitalize="none"
-						keyboardType="default"
-					/>
-					<AppInput
-						name="Confirm Password"
-						style={styles.input}
-						onChangeText={(
-							confirmPassword: React.SetStateAction<string>
-						) => setConfirmPassword(confirmPassword)}
-						autoCorrect={false}
-						secureTextEntry={true}
-						autoCapitalize={"none"}
-						keyboardType="default"
-					/>
+					<View>
+						<TouchableOpacity
+							style={styles.eye}
+							onPress={togglePasswordVisibility}
+						>
+							<MaterialIcons
+								name={
+									isPasswordVisible
+										? "visibility"
+										: "visibility-off"
+								}
+								size={24}
+								color="#494949"
+							/>
+						</TouchableOpacity>
+						<AppInput
+							name="Password"
+							style={styles.input}
+							onChangeText={(
+								password: React.SetStateAction<string>
+							) => setPassword(password)}
+							autoCorrect={false}
+							secureTextEntry={true}
+							autoCapitalize="none"
+							keyboardType="default"
+						/>
+					</View>
+					<View>
+						<TouchableOpacity
+							style={styles.eye}
+							onPress={togglePasswordVisibility}
+						>
+							<MaterialIcons
+								name={
+									isPasswordVisible
+										? "visibility"
+										: "visibility-off"
+								}
+								size={24}
+								color="#494949"
+							/>
+						</TouchableOpacity>
+						<AppInput
+							name="Confirm Password"
+							style={styles.input}
+							onChangeText={(
+								password: React.SetStateAction<string>
+							) => setPassword(password)}
+							autoCorrect={false}
+							secureTextEntry={true}
+							autoCapitalize="none"
+							keyboardType="default"
+						/>
+					</View>
 					<View style={styles.checkbox}>
 						<Checkbox
 							label="By signing up, you agree to our Terms of Service and Privacy Policy."
@@ -204,5 +244,11 @@ const styles = StyleSheet.create({
 		color: "#1f6afe",
 		fontSize: 18,
 		fontWeight: "500",
+	},
+	eye: {
+		position: "absolute",
+		top: 44,
+		right: 40,
+		zIndex: 99,
 	},
 });
