@@ -22,7 +22,7 @@ const Carousel = () => {
 	}, [fontsLoaded]);
 
 	const handleGettingStarted = () => {
-		Alert.alert("Hello World");
+		navigation.navigate("Welcome");
 	};
 
 	if (!fontsLoaded) {
@@ -39,8 +39,12 @@ const Carousel = () => {
 						your fingertips
 					</Text>
 				</View>
-				<TouchableOpacity onPress={handleGettingStarted}>
-					<AppButton title={"Getting Started"} textColor="primary" />
+				<TouchableOpacity>
+					<AppButton
+						title={"Getting Started"}
+						textColor="primary"
+						onPress={handleGettingStarted}
+					/>
 				</TouchableOpacity>
 				<View
 					style={{
