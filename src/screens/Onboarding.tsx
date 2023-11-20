@@ -22,7 +22,8 @@ const Onboarding = () => {
 
 	return (
 		<View style={styles.container}>
-			<View style={styles.card}></View>
+			<View style={styles.card}>
+			</View>
 			<Text style={styles.text}>SwyftDrop</Text>
 		</View>
 	);
