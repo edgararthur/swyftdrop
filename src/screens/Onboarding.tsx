@@ -1,28 +1,41 @@
-import React, { useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, Image } from "react-native";
 import colors from "../config/colors";
-import { useFonts } from "@expo-google-fonts/poppins";
+import Font from "expo-font";
 import { useNavigation } from "@react-navigation/native";
 
 const Onboarding = () => {
-	const [fontsLoaded] = useFonts({
-		"Poppins-Regular": require("../../assets/fonts/Poppins-Regular.ttf"),
-		"Poppins-Medium": require("../../assets/fonts/Poppins-Medium.ttf"),
-		"Poppins-Semibold": require("../../assets/fonts/Poppins-SemiBold.ttf"),
-		"Poppins-Bold": require("../../assets/fonts/Poppins-Bold.ttf"),
-	});
-
 	const navigation = useNavigation();
 
-	useEffect(() => {
-		if (!fontsLoaded) {
-			return;
+	const [isLoading, setIsLoading] = React.useState(true);
+
+	React.useEffect(() => {
+		const loadFonts = async () => {
+			try {
+				await Font.loadAsync({
+					"Poppins-Regular": require("../../assets/fonts/Poppins-Regular.ttf"),
+          			"Poppins-Medium": require("../../assets/fonts/Poppins-Medium.ttf"),
+					"Poppins-Semibold": require("../../assets/fonts/Poppins-SemiBold.ttf"),
+          			"Poppins-Bold": require("../../assets/fonts/Poppins-Bold.ttf"),
+				});
+			} catch (error) {
+				return error
+			} finally {
+				setIsLoading(false)
+			}
 		}
-	}, [fontsLoaded]);
+		loadFonts()
+	}, [])
+
+	// Only render content if fonts are loaded
+	if (isLoading) {
+		return null;
+	}
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.card}>
+				<Image source={require("swyftdrop/assets/images/delivery.png")} style={{ width: 200, height: 200 }} />
 			</View>
 			<Text style={styles.text}>SwyftDrop</Text>
 		</View>
